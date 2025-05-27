@@ -6,10 +6,7 @@ COPY . .
 RUN npm run build 
 
 # Stage 2: Production
-FROM build AS final
-WORKDIR /app
-COPY --from=build /app/build ./build
-COPY package*.json ./
-RUN npm install --production
+FROM nginx:alpine AS production
+COPY --from=build /app/dist/* /usr/share/nginx/html
 EXPOSE 80
-CMD ["npm", "start"]
+CMD ["nginx" "-g" "daemon off;"]
