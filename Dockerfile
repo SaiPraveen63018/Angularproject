@@ -6,9 +6,9 @@ COPY ..
 RUN npm run build 
 
 # Stage 2: Production
-FROM builder AS final
+FROM build AS final
 WORKDIR /app
-COPY --from=builder /app/build ./build
+COPY --from=build /app/build ./build
 COPY package*.json ./
 RUN npm install --production
 EXPOSE 80
