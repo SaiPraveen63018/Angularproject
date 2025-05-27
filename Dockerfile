@@ -1,5 +1,5 @@
 # Stage 1: Build angular image
-FROM node:17 AS build
+FROM node:16 AS build
 WORKDIR /app
 COPY package*.json ./
 RUN npm install -g @angular/cli@13
